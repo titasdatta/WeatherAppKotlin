@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WeatherAppKotlin</string>
+    <string name="open_weather_map_api_key">95bc88e2230ab628bdd7aa8cc1d1287a</string>
 </resources>
