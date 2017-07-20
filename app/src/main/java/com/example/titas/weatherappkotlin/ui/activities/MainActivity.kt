@@ -8,11 +8,9 @@ import com.example.titas.weatherappkotlin.ui.adapters.ForecastListAdapter
 import com.example.titas.weatherappkotlin.R
 import com.example.titas.weatherappkotlin.data.ForecastRequest
 import com.example.titas.weatherappkotlin.domain.commands.RequestForecastCommand
+import com.example.titas.weatherappkotlin.domain.model.Forecast
+import org.jetbrains.anko.*
 import org.jetbrains.anko.custom.async
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.find
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,7 +36,11 @@ class MainActivity : AppCompatActivity() {
         doAsync {
             val result = RequestForecastCommand("94043").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result)
+                forecastList.adapter = ForecastListAdapter(result, object : ForecastListAdapter.OnItemClickListener {
+                    override fun invoke(forecast: Forecast) {
+                        toast(forecast.date)
+                    }
+                })
             }
         }
     }
